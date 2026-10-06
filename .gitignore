@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Built Android APK (large binary) - host via GitHub Releases or copy in before deploy
+public/*.apk

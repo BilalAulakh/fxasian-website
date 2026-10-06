@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FXAsian download website
 
-## Getting Started
+A one-page Next.js site with a **Download for Android** button for the FXAsian app.
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Where the APK comes from
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The button links to `NEXT_PUBLIC_APK_URL`, or `/FXAsian.apk` if that is not set.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Simple:** build the app (`flutter build apk --release` in the Flutter project) and copy
+  `build/app/outputs/flutter-apk/app-release.apk` to `public/FXAsian.apk`.
+  `public/*.apk` is git-ignored.
+- **Recommended for a ~60 MB file:** upload the APK to a GitHub Release (or any file host) and set
+  `NEXT_PUBLIC_APK_URL` to its download link.
 
-## Learn More
+Other settings (all optional, read at build time):
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Example | Purpose |
+|---|---|---|
+| `NEXT_PUBLIC_APK_URL` | `https://github.com/<you>/<repo>/releases/latest/download/FXAsian.apk` | Download link |
+| `NEXT_PUBLIC_APK_VERSION` | `1.0.0` | Version shown under the button |
+| `NEXT_PUBLIC_WEB_APP_URL` | `https://app.example.com` | "Open FXAsian Web" link for iPhone / desktop |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deploy (Vercel)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Push this folder to a GitHub repository.
+2. On vercel.com: **Add New > Project**, import the repository.
+3. Under **Environment Variables** add `NEXT_PUBLIC_APK_URL` (and the others if needed).
+4. Deploy. Changing a variable needs a redeploy, because the values are built into the page.
 
-## Deploy on Vercel
+## Releasing a new app version
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Installed apps (version 1.0.1 and newer) update themselves from inside the app, so users do not
+need to come back to this site.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. In the Flutter project, raise `version:` in `pubspec.yaml` (for example `1.0.1+2` -> `1.0.2+3`;
+   the number after `+` must go up every time).
+2. Run `powershell -ExecutionPolicy Bypass -File .\RELEASE_APK.ps1` in the Flutter project. It builds
+   the APK with the release key (`android/key.properties`), copies it to `public/FXAsian.apk` and
+   prints the version, build number and SHA-256.
+3. Deploy this site (update `NEXT_PUBLIC_APK_VERSION` too).
+4. In the app: **Admin > App Update**, enter the printed values and the APK link, then **Publish**.
+   Turn on **Required update** only when old versions must stop working.
