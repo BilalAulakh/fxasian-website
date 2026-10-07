@@ -7,7 +7,8 @@ import styles from "./page.module.css";
 const APK_URL =
   process.env.NEXT_PUBLIC_APK_URL ??
   "https://github.com/BilalAulakh/asianfx-app/releases/latest/download/FXAsian.apk";
-const APK_VERSION = process.env.NEXT_PUBLIC_APK_VERSION ?? "1.0.1";
+// Shown under the button only when set; the link always serves the newest APK.
+const APK_VERSION = process.env.NEXT_PUBLIC_APK_VERSION;
 // Optional link to the Flutter web build, for iPhone and desktop users.
 const WEB_APP_URL = process.env.NEXT_PUBLIC_WEB_APP_URL;
 
@@ -49,7 +50,9 @@ export default function Home() {
           </svg>
           Download for Android
         </a>
-        <p className={styles.meta}>Version {APK_VERSION} &middot; Android 6.0 or newer</p>
+        <p className={styles.meta}>
+          {APK_VERSION ? `Version ${APK_VERSION}` : "Latest version"} &middot; Android 6.0 or newer
+        </p>
       </section>
 
       <section className={styles.features}>
@@ -81,8 +84,71 @@ export default function Home() {
           </li>
         </ol>
         <p className={styles.note}>
-          Android may show a warning because the app is not from the Play Store. Only install the file
-          downloaded from this website.
+          Android may show a warning because the app is not from the Play Store - see the next step. Only
+          install the file downloaded from this website.
+        </p>
+      </section>
+
+      <section className={styles.card} id="app-blocked">
+        <h2 className={styles.h2}>Seeing &ldquo;App blocked to protect your device&rdquo;?</h2>
+        <p className={styles.muted}>
+          This is a normal Android check for apps installed from a website instead of the Play Store. Follow
+          these two taps to continue.
+          <br />
+          <span lang="ur-Latn">
+            Yeh Android ka aam check hai jo website se install hone wali apps par aata hai. Bas yeh 2 tap karein.
+          </span>
+        </p>
+
+        <div className={styles.mockRow}>
+          <figure className={styles.mockStep}>
+            <figcaption className={styles.mockCaption}>
+              <span className={styles.stepNo}>1</span>
+              Tap <b>More details</b>
+              <span className={styles.ur} lang="ur-Latn">&ldquo;More details&rdquo; dabayein</span>
+            </figcaption>
+            <div className={styles.mockPhone} aria-hidden="true">
+              <div className={styles.mockTitle}>App blocked to protect your device</div>
+              <div className={styles.mockApp}>
+                <span className={styles.mockIcon}>FX</span> FXAsian
+              </div>
+              <div className={styles.mockText}>This developer is not known yet. It may be unsafe.</div>
+              <div className={`${styles.mockLink} ${styles.highlight}`}>More details &#8964;</div>
+              <div className={styles.mockButton}>Got it</div>
+            </div>
+          </figure>
+
+          <figure className={styles.mockStep}>
+            <figcaption className={styles.mockCaption}>
+              <span className={styles.stepNo}>2</span>
+              Tap <b>Install anyway</b>
+              <span className={styles.ur} lang="ur-Latn">&ldquo;Install anyway&rdquo; dabayein</span>
+            </figcaption>
+            <div className={styles.mockPhone} aria-hidden="true">
+              <div className={styles.mockTitle}>App blocked to protect your device</div>
+              <div className={styles.mockApp}>
+                <span className={styles.mockIcon}>FX</span> FXAsian
+              </div>
+              <div className={styles.mockText}>More details &#8963;</div>
+              <div className={`${styles.mockLink} ${styles.highlight}`}>Install anyway</div>
+              <div className={styles.mockButton}>Got it</div>
+            </div>
+          </figure>
+        </div>
+
+        <p className={styles.muted}>
+          On some phones the link is called <b>Install without scanning</b>. Do <b>not</b> tap &ldquo;Got
+          it&rdquo; - that cancels the install.
+          <br />
+          <span lang="ur-Latn">
+            Kuch phones par &ldquo;Install without scanning&rdquo; likha hota hai. &ldquo;Got it&rdquo; na
+            dabayein, us se install ruk jata hai.
+          </span>
+        </p>
+        <p className={styles.note}>
+          You only need to do this once. Later updates install from inside the app.
+          <br />
+          <span lang="ur-Latn">Yeh sirf pehli dafa karna hai. Agli updates app ke andar se aati hain.</span>
         </p>
       </section>
 
