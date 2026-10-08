@@ -141,7 +141,7 @@
   margin: 10px 0;
 }
 
-/* "App blocked" guide: two simplified phone dialogs showing where to tap. */
+/* "App blocked" guide: two real Play Protect screenshots with the tap target ringed. */
 .mockRow {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -181,68 +181,26 @@
   padding-left: 28px;
 }
 
-.mockPhone {
-  background: var(--bg);
-  border: 1px solid var(--line);
+.shot {
+  position: relative;
   border-radius: 18px;
-  padding: 16px 14px;
-  font-size: 13px;
-  text-align: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
 }
 
-.mockTitle {
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 1.3;
-  margin-bottom: 10px;
+.shotImg {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.mockApp {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.mockIcon {
-  width: 26px;
-  height: 26px;
-  border-radius: 7px;
-  background: var(--ink);
-  color: var(--bg);
-  display: grid;
-  place-items: center;
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.mockText {
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-.mockLink {
-  display: inline-block;
-  font-weight: 700;
-  padding: 4px 10px;
-  margin-bottom: 12px;
-}
-
-.highlight {
-  color: var(--green);
-  border: 2px solid var(--green);
+/* Ring drawn over the link the user has to tap in the screenshot. */
+.tapRing {
+  position: absolute;
+  border: 3px solid var(--green);
   border-radius: 999px;
   box-shadow: 0 0 0 4px var(--green-soft);
-}
-
-.mockButton {
-  background: var(--line);
-  color: var(--muted);
-  border-radius: 999px;
-  padding: 7px;
-  font-weight: 600;
+  pointer-events: none;
 }
 
 .link {

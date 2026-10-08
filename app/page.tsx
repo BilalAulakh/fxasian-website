@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./page.module.css";
 
 // Where the APK is served from: the latest GitHub Release of the app, built and
@@ -31,29 +32,7 @@ export default function Home() {
       <h1 className={styles.title}>Trade gold, forex and crypto from your phone</h1>
       <p className={styles.lead}>Live prices, one-tap orders and USDT deposits - in one app.</p>
 
-      <section className={styles.card}>
-        <a className={styles.download} href={APK_URL} download="FXAsian.apk">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M12 4v12" />
-            <path d="m6 11 6 6 6-6" />
-            <path d="M5 20h14" />
-          </svg>
-          Download for Android
-        </a>
-        <p className={styles.meta}>
-          {APK_VERSION ? `Version ${APK_VERSION}` : "Latest version"} &middot; Android 6.0 or newer
-        </p>
-      </section>
+   
 
       <section className={styles.features}>
         {features.map((f) => (
@@ -107,14 +86,15 @@ export default function Home() {
               Tap <b>More details</b>
               <span className={styles.ur} lang="ur-Latn">&ldquo;More details&rdquo; dabayein</span>
             </figcaption>
-            <div className={styles.mockPhone} aria-hidden="true">
-              <div className={styles.mockTitle}>App blocked to protect your device</div>
-              <div className={styles.mockApp}>
-                <span className={styles.mockIcon}>FX</span> FXAsian
-              </div>
-              <div className={styles.mockText}>This developer is not known yet. It may be unsafe.</div>
-              <div className={`${styles.mockLink} ${styles.highlight}`}>More details &#8964;</div>
-              <div className={styles.mockButton}>Got it</div>
+            <div className={styles.shot}>
+              <Image
+                src="/install/step1-more-details.jpg"
+                alt="Play Protect 'App blocked' screen with the More details link"
+                width={1003}
+                height={1173}
+                className={styles.shotImg}
+              />
+              <span className={styles.tapRing} style={{ left: "6%", top: "68%", width: "32%", height: "10%" }} />
             </div>
           </figure>
 
@@ -124,25 +104,48 @@ export default function Home() {
               Tap <b>Install anyway</b>
               <span className={styles.ur} lang="ur-Latn">&ldquo;Install anyway&rdquo; dabayein</span>
             </figcaption>
-            <div className={styles.mockPhone} aria-hidden="true">
-              <div className={styles.mockTitle}>App blocked to protect your device</div>
-              <div className={styles.mockApp}>
-                <span className={styles.mockIcon}>FX</span> FXAsian
-              </div>
-              <div className={styles.mockText}>More details &#8963;</div>
-              <div className={`${styles.mockLink} ${styles.highlight}`}>Install anyway</div>
-              <div className={styles.mockButton}>Got it</div>
+            <div className={styles.shot}>
+              <Image
+                src="/install/step2-install-anyway.jpg"
+                alt="Play Protect screen after opening More details, with the Install anyway link"
+                width={984}
+                height={1327}
+                className={styles.shotImg}
+              />
+              <span className={styles.tapRing} style={{ left: "5%", top: "72%", width: "31%", height: "8%" }} />
             </div>
           </figure>
         </div>
-
+   <section className={styles.card}>
+        <a className={styles.download} href={APK_URL} download="FXAsian.apk">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.4"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 4v12" />
+            <path d="m6 11 6 6 6-6" />
+            <path d="M5 20h14" />
+          </svg>
+          Download for Android
+        </a>
+        <p className={styles.meta}>
+          {APK_VERSION ? `Version ${APK_VERSION}` : "Latest version"} &middot; Android 6.0 or newer
+        </p>
+      </section>
         <p className={styles.muted}>
-          On some phones the link is called <b>Install without scanning</b>. Do <b>not</b> tap &ldquo;Got
-          it&rdquo; - that cancels the install.
+          On some phones the link is called <b>Install without scanning</b>. Do <b>not</b> tap <b>OK</b> - that
+          cancels the install.
           <br />
           <span lang="ur-Latn">
-            Kuch phones par &ldquo;Install without scanning&rdquo; likha hota hai. &ldquo;Got it&rdquo; na
-            dabayein, us se install ruk jata hai.
+            Kuch phones par &ldquo;Install without scanning&rdquo; likha hota hai. &ldquo;OK&rdquo; na dabayein, us se
+            install ruk jata hai.
           </span>
         </p>
         <p className={styles.note}>
